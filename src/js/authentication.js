@@ -21,7 +21,8 @@ createUserButton.addEventListener('click', function () {
         .auth()
         .createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
         .then(function () {
-            alert('Bem vindo ' + emailInput.value);
+            // alert('Bem vindo ' + emailInput.value);
+            displayName.innerText = 'Bem vindo, ' + emailInput.value;
         })
         .catch(function (error) {
             console.error(error.code);
@@ -38,7 +39,7 @@ authEmailPassButton.addEventListener('click', function () {
         .then(function (result) {
             console.log(result);
             displayName.innerText = 'Bem vindo, ' + emailInput.value;
-            alert('Autenticado ' + emailInput.value);
+            // alert('Autenticado ' + emailInput.value);
 
         })
         .catch(function (error) {
@@ -55,27 +56,10 @@ logOutButton.addEventListener('click', function () {
         .signOut()
         .then(function () {
             displayName.innerText = 'Você não está autenticado';
-            alert('Você se deslogou');
+            // alert('Você se deslogou');
             validSession = false;
         }, function (error) {
             console.error(error);
-        });
-});
-
-// Autenticar Anônimo
-authAnonymouslyButton.addEventListener('click', function () {
-    firebase
-        .auth()
-        .signInAnonymously()
-        .then(function (result) {
-            console.log(result);
-            displayName.innerText = 'Bem vindo, desconhecido';
-            alert('Autenticado Anonimamente');
-        })
-        .catch(function (error) {
-            console.error(error.code);
-            console.error(error.message);
-            alert('Falha ao autenticar, verifique o erro no console.')
         });
 });
 
@@ -90,13 +74,6 @@ authGitHubButton.addEventListener('click', function () {
 authGoogleButton.addEventListener('click', function () {
     // Providers
     var provider = new firebase.auth.GoogleAuthProvider();
-    signIn(provider);
-});
-
-// Autenticar com Facebook
-authFacebookButton.addEventListener('click', function () {
-    // Providers
-    var provider = new firebase.auth.FacebookAuthProvider();
     signIn(provider);
 });
 
